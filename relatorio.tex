@@ -1,53 +1,21 @@
-%% abtex2-modelo-trabalho-academico.tex, v-1.8 laurocesar
-%% Copyright 2012-2013 by abnTeX2 group at http://abntex2.googlecode.com/ 
-%%
-%% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%%   http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
-%% version 2005/12/01 or later.
-%%
-%% This work has the LPPL maintenance status `maintained'.
-%% 
-%% The Current Maintainer of this work is the abnTeX2 team, led
-%% by Lauro César Araujo. Further information are available on 
-%% http://abntex2.googlecode.com/
-%%
-%% This work consists of the files abntex2-modelo-trabalho-academico.tex,
-%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
-%%
-
-% ------------------------------------------------------------------------
-% ------------------------------------------------------------------------
-% abnTeX2: Modelo de Trabalho Academico (tese de doutorado, dissertacao de
-% mestrado e trabalhos monograficos em geral) em conformidade com 
-% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
-% Apresentacao
-% ime-abntex2: Modificações no modelo abntex2 para conformar com os padrões
-% do IME (Instituto Militar de Engenharia).
-% ------------------------------------------------------------------------
-% ------------------------------------------------------------------------
-
 \documentclass[
-	% -- opções da classe memoir --
-	12pt,				% tamanho da fonte
-	%openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
-	%twoside,			% para impressão em verso e anverso. Oposto a oneside
-	oneside,			% para impressão em verso e anverso. Oposto a oneside
-	a4paper,			% tamanho do papel. 
-	% -- opções da classe abntex2 --
-	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
-	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
-	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
-	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
-	% -- opções do pacote babel --
-	english,			% idioma adicional para hifenização
-	brazil,				% o último idioma é o principal do documento
-	% -- opções da classe ime-abntex2 --
-	%brasao,			% descomente para habilitar o brasão no topo da capa
-	]{ime-abntex2}
+  % -- opções da classe memoir --
+  12pt,                 % tamanho da fonte
+  %openright,           % capítulos começam em pág ímpar (insere página vazia caso preciso)
+  %twoside,             % para impressão em verso e anverso. Oposto a oneside
+  oneside,              % para impressão em verso e anverso. Oposto a oneside
+  a4paper,              % tamanho do papel.
+  % -- opções da classe abntex2 --
+  %chapter=TITLE,       % títulos de capítulos convertidos em letras maiúsculas
+  %section=TITLE,       % títulos de seções convertidos em letras maiúsculas
+  %subsection=TITLE,    % títulos de subseções convertidos em letras maiúsculas
+  %subsubsection=TITLE, % títulos de subsubseções convertidos em letras maiúsculas
+  % -- opções do pacote babel --
+  english,              % idioma adicional para hifenização
+  brazil,               % o último idioma é o principal do documento
+  % -- opções da classe ime-abntex2 --
+  %brasao,              % descomente para habilitar o brasão no topo da capa
+]{ime-abntex2}
 
 
 % ---
@@ -57,51 +25,29 @@
 % ---
 % Pacotes fundamentais para o relatório em questão
 % ---
-\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
-\usepackage{cmap}			% Mapear caracteres especiais no PDF
-\usepackage{lmodern}			% Usa a fonte Latin Modern
-%\usepackage{amsmath}			% Para usar fontes ams
-%\usepackage{amsfonts}			% Para usar fontes ams
-%\usepackage{times}			% Usa a fonte Times
-\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
-%\usepackage{lastpage}			% Usado pela Ficha catalográfica
-\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
-\usepackage{color}			% Controle das cores
-\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage[utf8]{inputenc} % Codificacao do documento (conversão automática dos acentos)
+\usepackage{cmap}           % Mapear caracteres especiais no PDF
+\usepackage{lmodern}        % Usa a fonte Latin Modern
+%\usepackage{amsmath}       % Para usar fontes ams
+%\usepackage{amsfonts}      % Para usar fontes ams
+%\usepackage{times}         % Usa a fonte Times
+\usepackage[T1]{fontenc}    % Selecao de codigos de fonte.
+%\usepackage{lastpage}      % Usado pela Ficha catalográfica
+\usepackage{indentfirst}    % Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}          % Controle das cores
+\usepackage{graphicx}       % Inclusão de gráficos
 % ---
 
 % ---
 % Pacotes adicionais, usados apenas no âmbito do documento em questão
 % ---
-\usepackage{lipsum}			% para geração de dummy text
+\usepackage{lipsum} % para geração de dummy text
 % ---
 
 % ---
 % Pacotes de citações
 % ---
-\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
-
-% --- 
-% CONFIGURAÇÕES DE PACOTES
-% --- 
-
-% ---
-% Configurações do pacote backref
-% Usado sem a opção hyperpageref de backref
-\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
-% Texto padrão antes do número das páginas
-\renewcommand{\backref}{}
-% Define os textos da citação
-\renewcommand*{\backrefalt}[4]{
-	\ifcase #1 %
-		Nenhuma citação no texto.%
-	\or
-		Citado na página #2.%
-	\else
-		Citado #1 vezes nas páginas #2.%
-	\fi}%
-% ---
+\usepackage[alf]{abntex2cite} % Citações padrão ABNT
 
 
 % ---
@@ -113,20 +59,21 @@
   Ciclano de Tal
 }
 \local{Rio de Janeiro}
-\data{Novembro de 2013}
-\orientador{Beltrano Beltranoso - Ph.D.}
-%\coorientador{Equipe \abnTeX}
+\data{Março de 2019}
+\orientador{Beltrano Beltranoso}{Ph.D., do IME}
+\coorientador{Tic Tac}%{M.Sc., do IME}
 \instituicao{%
   Instituto Militar de Engenharia
   \par
   Seção de Computação
   \par
-  Graduação em Engenharia de Computação}
-\tipotrabalho{Iniciação à Pesquisa}
-% O preambulo deve conter o tipo do trabalho, o objetivo, 
+  Graduação em Engenharia de Computação
+}
+\tipotrabalho{Projeto Final de Curso}
+% O preambulo deve conter o tipo do trabalho, o objetivo,
 % o nome da instituição e a área de concentração 
-\preambulo{Iniciação à Pesquisa apresentada ao Curso de Graduação
-em Engenharia de Computação do Instituto Militar de Engenharia.}
+\preambulo{Projeto Final de Curso de Graduação em Engenharia de Computação do
+Instituto Militar de Engenharia.}
 % ---
 
 
@@ -216,12 +163,19 @@ em Engenharia de Computação do Instituto Militar de Engenharia.}
 %     \includepdf{fig_ficha_catalografica.pdf}
 % \end{fichacatalografica}
 \imprimirfichacatalografica
-{xxxx} % esse número deve ser montado com a ajuda da biblioteca do IME
+{666.555}  % esse número deve ser montado com a ajuda da biblioteca do IME
+{S455h}
 {Silva, F., Tal, C.} % <último nome>, <abreviação do primeiro nome>
-{1. Engenharia da computação.
- 2. Redes Neurais.
- 3. Lógica Nebulosa.
- 4. Otimização da Colônia de Formigas. Instituto Militar de Engenharia.}
+{Projeto de Fim de Curso (PFC)}
+{%
+  1. Curso de engenharia da computação - Projeto Final de Curso.
+  2. Um Assunto.
+  3. Outro Assunto.
+  I. Silva, Cilano.
+  II. Beltrano, Fulano.
+  III. \@title.
+  IV. Instituto Militar de Engenharia.}
+{Técnicas de blablabla}
 % ---
 
 % ---
@@ -267,7 +221,7 @@ em Engenharia de Computação do Instituto Militar de Engenharia.}
 % Por enquanto a classe precisa dos dois convidados
 \convidadoum{Um Dois Três de Oliveira Quatro - D.Sc. do IME}{}
 \convidadodois{Blau Bléu Bliu - Ph.D do IME}{}
-\imprimirfolhadeaprovacao{11 de novembro de 2013}
+\imprimirfolhadeaprovacao{19 de março de 2019}
 % ---
 
 % ---
@@ -530,7 +484,7 @@ em Engenharia de Computação do Instituto Militar de Engenharia.}
 % Referências bibliográficas
 % ----------------------------------------------------------
 %\bibliographystyle{plainnat}%abbrvnat, unsrtnat, apsrev, rmpaps, IEEEtranN, achemso, rsc
-\bibliography{referencias}
+%\bibliography{referencias}
 
 % ----------------------------------------------------------
 % Glossário

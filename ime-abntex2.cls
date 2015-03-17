@@ -1,6 +1,6 @@
 %% vim: et ts=2 sts=2 sw=2
 %%
-%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para a Universidade XXXX
+%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para o Instituto Militar de Engenharia
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -18,26 +18,35 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ime-abntex2}[2013/10/10 v0.1 Modelo do Instituto Militar de Engenharia baseado em abnTeX2]
+\ProvidesClass{ime-abntex2}[2015/03/16 v0.3 Modelo do Instituto Militar de Engenharia baseado em abnTeX2]
 \usepackage[utf8]{inputenc} % Codificacao do documento atual, isto é, dessa classe
+\usepackage{lastpage} % Para total de páginas
 
 % para mais detalhes sobre as opções:
 % http://en.wikibooks.org/wiki/LaTeX/Creating_Packages
 
 % brasao - opção para colocar o brasão no topo da primeira página
 \newif\ifime@brasao\ime@brasaofalse
-\DeclareOption{brasao}{
-  \ime@brasaotrue
-}
+\DeclareOption{brasao}{\ime@brasaotrue}
 
 %
 % Repassa todos os parametros a classe abntex2,
-\DeclareOption*{
-  \PassOptionsToClass{\CurrentOption}{abntex2}
-}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{abntex2}}
 
 \ProcessOptions\relax
 \LoadClass{abntex2}
+
+% Muda o cabeçalho (parte que tem o número da página, e originalmente o capítulo atual com uma linha embaixo)
+\makepagestyle{abntheadings}
+%\makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{\ABNTEXfontereduzida\textit\leftmark}
+%\makeoddhead{abntheadings}{\ABNTEXfontereduzida\textit\rightmark}{}{\ABNTEXfontereduzida\thepage}
+%\makeheadrule{abntheadings}{\textwidth}{\normalrulethickness}
+\makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{}
+\makeoddhead{abntheadings}{}{}{\ABNTEXfontereduzida\thepage}
+
+% Aumentar o tamanho da linha de assinatura
+% XXX o tamanho deveria sempre abranger o maior nome, atualmente é fixo em 10cm
+\setlength{\ABNTEXsignwidth}{10cm}
 
 
 % Mudar fonte dos títulos para usar fontes com serif
@@ -88,7 +97,7 @@
 
 \makeatletter
 
-\renewcommand{\folhaderostocontent}{
+\renewcommand{\folhaderostocontent}{\
   \begin{center}
   {\ABNTEXchapterfont\Large Instituto Militar de Engenharia}
 
@@ -127,22 +136,22 @@
 % Ficha catalográfica
 % ===================
 
-\newcommand{\imprimirfichacatalografica}[3]{%
+\newcommand{\imprimirfichacatalografica}[6]{%
   \begin{fichacatalografica}
   \let\footnotesize\small
   \let\footnoterule\relax
   \let\footnote\thanks
   \noindent
+  \normalsize
   %XXX: what's the best way to parametrize this year?
-  c2013
-
-  \vspace{10mm}
+  %     it may not always be desirable to use the current year
+  %c\the\year{}
+  %\vspace{10mm}
 
   {\noindent
     INSTITUTO MILITAR DE ENGENHARIA\\
-    Praça General Tibúrcio, 80-Praia Vermelha \\
+    Praça General Tibúrcio, 80 - Praia Vermelha\\
     Rio de Janeiro-RJ CEP 22290-270}
-
   \vspace{10mm}
 
   {\noindent
@@ -163,25 +172,33 @@
   \vspace{10mm}
 
   {\noindent
-    \hspace{3cm}
-    \framebox[12.5cm]{\footnotesize
-      \begin{minipage}{13cm}
-      \vspace*{1mm}
-      \parbox[t]{1.5cm}{\hspace{2mm} #1}% código estranho
-        \parbox[t]{11cm}{\noindent #2}\\% autores com abreviações estranhas
-        \parbox[t]{1.5cm}{\ }
-        \parbox[t]{11cm}{\noindent \hspace{4mm} \imprimirtitulo \hspace{1mm}/ \hspace{6mm} {\let\\=, \imprimirautor} : Instituto Militar de Engenharia, 2013.}\\
-        \parbox[t]{1.5cm}{\ }
-        \parbox[t]{11cm}{\noindent \hspace{4mm}}\\
+    \hspace{4.5cm}
+    \framebox[11.5cm]{\footnotesize
+      \begin{minipage}{12cm}
+        \vspace*{1mm}
+        \parbox[t]{2cm}{\hspace{4mm} #1}% código CDD
+        \parbox[t]{9.5cm}{\noindent #3}\\
+        \parbox[t]{2cm}{\hspace{4mm} #2}% código estranho
+        %\parbox[t]{1.5cm}{\ }
+        % FIXME a parte do título deve estar apenas com a primeira letra maiúscula, não consegui fazer isso, coloquei para o título entrar como argumento
+        %\parbox[t]{9cm}{\noindent \hspace{4mm} {\let\\=\ \MakeLowercase{\imprimirtitulo}} /{\let\\=, \imprimirautor}; orientados por \imprimirorientador\ - Rio de Janeiro: Instituto Militar de Engenharia, \the\year{}.}\\
+        \parbox[t]{9.5cm}{\noindent \hspace{4mm} #6 /{\let\\=, \imprimirautor}; orientados por \imprimirorientador\ - Rio de Janeiro: Instituto Militar de Engenharia, \the\year{}.}\\
+        \parbox[t]{2cm}{\ }
+        \parbox[t]{9.5cm}{\noindent \hspace{4mm}}\\
         [\baselineskip]
-        \parbox[t]{1.5cm}{\ }
-        \parbox[t]{11cm}{\noindent \hspace{4mm} Iniciação à Pesquisa (IP) - Instituto Militar de Engenharia \vspace{1mm} - Rio de Janeiro, 2013. } \\
+        \parbox[t]{2cm}{\ }
+        \parbox[t]{9.5cm}{\noindent \hspace{4mm} \pageref{LastPage}p. : il.} \\
         [\baselineskip]
-        \parbox[t]{1.5cm}{\ }
-        \parbox[t]{11cm}{\noindent \hspace{4mm} #3}\\% tags estranhas
+        \parbox[t]{2cm}{\ }
+        \parbox[t]{9.5cm}{\noindent \hspace{4mm} #4 - Instituto Militar de Engenharia \vspace{1mm} - Rio de Janeiro, \the\year{}. } \\
         [\baselineskip]
-        \parbox[t]{10cm}{\ }
-        \parbox[t]{4.0 cm}{}
+        \parbox[t]{2cm}{\ }
+        \parbox[t]{9.5cm}{\noindent \hspace{4mm} #5}\\% tags estranhas
+        %[\baselineskip]
+        %\parbox[t]{9cm}{\ }
+        %\parbox[t]{2.5cm}{CDD #1}
+        %[\baselineskip]
+        %\parbox[t]{11.5cm}{\ }
       \end{minipage}
     }
   }
@@ -198,6 +215,11 @@
 %
 % \convidadoum{Fulano da Silva - Ph.D}{Convidado Especial}
 %
+
+%\newcommand{\orientadorNome}{}
+\let\oldorientador\orientador
+\newcommand{\imprimirorientadorTitulo}{}
+\renewcommand{\orientador}[2]{\oldorientador{#1}\renewcommand{\imprimirorientadorTitulo}{#2}}
 
 \newcommand{\convidadoumNome}{}
 \newcommand{\convidadoumTitulo}{}
@@ -234,9 +256,9 @@
 
   Aprovado em #1 pela seguinte Banca Examinadora:
 
-  \assinatura{\textbf{\imprimirorientador} \\ Orientador}
-  \assinatura{\textbf{\convidadoumNome} \\ \convidadoumTitulo}
-  \assinatura{\textbf{\convidadodoisNome} \\ \convidadodoisTitulo}
+  \assinatura{\textbf{\imprimirorientador\ - \imprimirorientadorTitulo} \\ Orientador}
+  \assinatura{\textbf{\convidadoumNome\ - \convidadoumTitulo}}
+  \assinatura{\textbf{\convidadodoisNome\ - \convidadodoisTitulo}}
   %TODO: find out why does abntex@ifnotempty doesn't work so we can have some dynamic list
   %\abntex@ifnotempty{\convidadoumNome}{\assinatura{\textbf{\convidadoumNome} \\ \convidadoumTitulo}}
   %\abntex@ifnotempty{\convidadodoisNome}{\assinatura{\textbf{\convidadodoisNome} \\ \convidadodoisTitulo}}
@@ -253,3 +275,5 @@
 
   \end{folhadeaprovacao}
 }
+
+% TODO corrigir modelo de referencias
